@@ -54,8 +54,6 @@ function App() {
       <DateDropdown onSelect={setBirthdate} />
       <GenderDropdown onSelect={setGender} />
       <ReadingTypeDropdown onSelect={setReadingType} />
-      <button onClick={handleStyle1ButtonClick}>Style1</button>
-<button onClick={handleStyle2ButtonClick}>Style2</button>
       <GenerateButton onClick={generateSpintax} />
       
       <div className="spintax-output">{spintax}+{style1}+{style2}</div>
