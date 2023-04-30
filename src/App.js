@@ -6,6 +6,27 @@ import GenerateButton from './GenerateButton';
 import './App.css';
 
 function App() {
+const TEXT_URL_1 = "https://your-link-to-the-first-text-file.txt";
+const TEXT_URL_2 = "https://your-link-to-the-second-text-file.txt";
+
+const [style1Text, setStyle1Text] = useState("");
+const [style2Text, setStyle2Text] = useState("");
+
+const fetchTextFromUrl = async (url) => {
+  const response = await fetch(url);
+  const text = await response.text();
+  return text;
+};
+
+const handleStyle1ButtonClick = async () => {
+  const text = await fetchTextFromUrl(TEXT_URL_1);
+  setStyle1Text(text);
+};
+
+const handleStyle2ButtonClick = async () => {
+  const text = await fetchTextFromUrl(TEXT_URL_2);
+  setStyle2Text(text);
+};
   const [birthdate, setBirthdate] = useState(null);
   const [gender, setGender] = useState(null);
   const [readingType, setReadingType] = useState(null);
@@ -28,8 +49,11 @@ function App() {
       <DateDropdown onSelect={setBirthdate} />
       <GenderDropdown onSelect={setGender} />
       <ReadingTypeDropdown onSelect={setReadingType} />
+      <button onClick={handleStyle1ButtonClick}>Style1</button>
+<button onClick={handleStyle2ButtonClick}>Style2</button>
       <GenerateButton onClick={generateSpintax} />
-      <div className="spintax-output">{spintax}</div>
+      
+      <div className="spintax-output">{spintax}+style1Text+style2Text</div>
     </div>
   );
 }
