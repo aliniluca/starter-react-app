@@ -34,13 +34,25 @@ const getRandomQuestion = () => {
   return questions[Math.floor(Math.random() * questions.length)];
 };
 
-const handleGenerateClick = () => {
-  const question = getRandomQuestion();
-  const readingTypeText = readingType === "Higher Self" ? "Higher Self" : readingType === "Shadow Self" ? "Shadow Self" : "Spirit Guide";
-  const output = `Write about the ${readingTypeText} of a ${gender === "male" ? "man" : "woman"} born on ${format(birthdate, "MMMM d")}. Use the second pronoun addressing the ${gender === "male" ? "man" : "woman"}. ${question}`;
-  setSpintax(output); // Fix the function name here
-};
-
+  const handleGenerateClick = () => {
+    if (birthdate && gender && readingType) {
+      const question = getRandomQuestion();
+      const readingTypeText =
+        readingType === "Higher Self"
+          ? "Higher Self"
+          : readingType === "Shadow Self"
+          ? "Shadow Self"
+          : "Spirit Guide";
+      const outputText = `Write about the ${readingTypeText} of a ${
+        gender === "male" ? "man" : "woman"
+      } born on ${format(birthdate, "MMMM d")}. Use the second pronoun addressing the ${
+        gender === "male" ? "man" : "woman"
+      }. ${question}`;
+      setOutput(outputText);
+    } else {
+      setOutput("Please fill in all the fields.");
+    }
+  };
 
   return (
     <div className="App">
@@ -49,8 +61,8 @@ const handleGenerateClick = () => {
       <GenderDropdown onSelect={setGender} />
       <ReadingTypeDropdown onSelect={setReadingType} />
       <GenerateButton onClick={handleGenerateClick} />
-      
-      <div className="spintax-output">{spintax}</div>
+
+      <div className="spintax-output">{output}</div>
     </div>
   );
 }
