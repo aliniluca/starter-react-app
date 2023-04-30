@@ -56,7 +56,7 @@ const handleStyle2ButtonClick = async () => {
 <button onClick={handleStyle2ButtonClick}>Style2</button>
       <GenerateButton onClick={generateSpintax} />
       
-      <div className="spintax-output">{spintax}+style1Text+style2Text</div>
+      <div className="spintax-output">{spintax}+{style1Text}+{style2Text}</div>
     </div>
   );
 }
