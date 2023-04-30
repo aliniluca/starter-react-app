@@ -5,14 +5,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendarAlt } from '@fortawesome/free-regular-svg-icons';
 
 const DateDropdown = ({ onSelect }) => {
-  const handleDateChange = (date) => {
+ const handleDateChange = (date) => {
     const monthNames = [
       'January', 'February', 'March', 'April', 'May', 'June',
       'July', 'August', 'September', 'October', 'November', 'December'
     ];
-    const selectedDate = `${date.getDate()} of ${monthNames[date.getMonth()]}`;
-      onSelect({ value: selectedDate });
-  };
+    const selectedDate = `${monthNames[date.getMonth()]} ${date.getDate()}`;
+    onSelect(selectedDate);
+};
 
   return (
     <div className="date-dropdown">
