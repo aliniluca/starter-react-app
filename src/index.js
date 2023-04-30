@@ -3,7 +3,10 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faCalendarAlt } from '@fortawesome/free-regular-svg-icons';
 
+library.add(faCalendarAlt);
 ReactDOM.render(
   <React.StrictMode>
     <App />
