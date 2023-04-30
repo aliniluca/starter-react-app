@@ -48,9 +48,9 @@ const getRandomQuestion = () => {
       } born on ${format(birthdate, "MMMM d")}. Use the second pronoun addressing the ${
         gender === "male" ? "man" : "woman"
       }. ${question}`;
-      setOutput(outputText);
+      setSpintax(outputText);
     } else {
-      setOutput("Please fill in all the fields.");
+      setSpintax("Please fill in all the fields.");
     }
   };
 
@@ -62,7 +62,7 @@ const getRandomQuestion = () => {
       <ReadingTypeDropdown onSelect={setReadingType} />
       <GenerateButton onClick={handleGenerateClick} />
 
-      <div className="spintax-output">{output}</div>
+      <div className="spintax-output">{spintax}</div>
     </div>
   );
 }
