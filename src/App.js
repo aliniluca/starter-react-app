@@ -48,7 +48,7 @@ const handleGenerateClick = () => {
       <DateDropdown onSelect={setBirthdate} />
       <GenderDropdown onSelect={setGender} />
       <ReadingTypeDropdown onSelect={setReadingType} />
-      <GenerateButton onClick={generateSpintax} />
+      <GenerateButton onClick={handleGenerateClick} />
       
       <div className="spintax-output">{output}</div>
     </div>
