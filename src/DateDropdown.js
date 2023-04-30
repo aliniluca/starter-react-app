@@ -21,7 +21,7 @@ const DateDropdown = ({ onSelect }) => {
         id="birthdate"
         placeholderText="Select a date"
         onChange={handleDateChange}
-        dateFormat="MMMM d"
+        dateFormat="MMMM do"
         showMonthDropdown
         showYearDropdown
         dropdownMode="select"
