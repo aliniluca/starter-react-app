@@ -17,12 +17,14 @@ function App() {
   const [spintax, setSpintax] = useState('');
  
 
-const questions = [
+const questions1 = [
   "What can he teach me?",
   "How is our connection?",
   "How do we work together?",
   "How can I listen to him",
-  "Where do I reach him?",
+  "Where do I reach him?"
+];
+ const questions2 = [
   "What is their connection with my spirit animal?",
   "What is their connection with my ancestors?",
   "What is their connection with my daimon self?",
@@ -30,13 +32,12 @@ const questions = [
   "What is their connection with my aura and inner energy?",
 ];
 
-const getRandomQuestion = () => {
-  return questions[Math.floor(Math.random() * questions.length)];
-};
+ 
 
 const handleGenerateClick = () => {
   if (birthdate && gender && readingType) {
-    const question = getRandomQuestion();
+    const selectedQuestions = Math.random() < 0.5 ? questions1 : questions2;
+    const questionText = selectedQuestions.join(" ");
     const readingTypeText =
       readingType === "Higher Self"
         ? "Higher Self"
@@ -48,12 +49,13 @@ const handleGenerateClick = () => {
       gender === "male" ? "man" : "woman"
     } born on ${birthdateText}. Use the second pronoun addressing the ${
       gender === "male" ? "man" : "woman"
-    }. ${question}`;
+    }. ${questionText}`;
     setSpintax(outputText);
   } else {
     setSpintax("Please fill in all the fields.");
   }
 };
+
 
 
   return (
