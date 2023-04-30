@@ -3,6 +3,9 @@ import DateDropdown from './DateDropdown';
 import GenderDropdown from './GenderDropdown';
 import ReadingTypeDropdown from './ReadingTypeDropdown';
 import GenerateButton from './GenerateButton';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
+
 import './App.css';
 
 function App() {
