@@ -44,10 +44,10 @@ const handleGenerateClick = () => {
         : readingType === "Shadow Self"
         ? "Shadow Self"
         : "Spirit Guide";
-    const birthdateText = birthdate instanceof Date && !isNaN(birthdate) ? format(birthdate, "MMMM d") : "Invalid date";
+   
     const outputText = `Write about the ${readingTypeText} of a ${
       gender === "male" ? "man" : "woman"
-    } born on ${birthdateText}. Use the second pronoun addressing the ${
+    } born on ${birthdate}. Use the second pronoun addressing the ${
       gender === "male" ? "man" : "woman"
     }. ${questionText}`;
     setSpintax(outputText);
