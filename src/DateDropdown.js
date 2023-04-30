@@ -26,7 +26,7 @@ const DateDropdown = ({ onSelect }) => {
         showYearDropdown
         dropdownMode="select"
         minDate={new Date('1900-01-01')}
-        maxDate={new Date()}
+        maxDate={new Date('2023-01-01')}
         customInput={<FontAwesomeIcon icon={faCalendarAlt} />}
       />
     </div>
