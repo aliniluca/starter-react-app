@@ -24,6 +24,7 @@ function App() {
   return (
     <div className="App">
       <h1>ChatGPT Prompt Generator</h1>
+      <FontAwesomeIcon icon={faCalendarAlt} size="3x" />
       <DateDropdown onSelect={setBirthdate} />
       <GenderDropdown onSelect={setGender} />
       <ReadingTypeDropdown onSelect={setReadingType} />
