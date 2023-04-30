@@ -5,7 +5,7 @@ import ReadingTypeDropdown from './ReadingTypeDropdown';
 import GenerateButton from './GenerateButton';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
-
+import { format } from "date-fns";
 import './App.css';
 
 function App() {
@@ -38,7 +38,7 @@ const handleGenerateClick = () => {
   const question = getRandomQuestion();
   const readingTypeText = readingType === "Higher Self" ? "Higher Self" : readingType === "Shadow Self" ? "Shadow Self" : "Spirit Guide";
   const output = `Write about the ${readingTypeText} of a ${gender === "male" ? "man" : "woman"} born on ${format(birthdate, "MMMM d")}. Use the second pronoun addressing the ${gender === "male" ? "man" : "woman"}. ${question}`;
-  setOutputText(output);
+  setGeneratedText(output); // Fix the function name here
 };
 
 
