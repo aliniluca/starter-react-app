@@ -56,7 +56,7 @@ function App() {
       <ReadingTypeDropdown onSelect={setReadingType} />
       <GenerateButton onClick={generateSpintax} />
       
-      <div className="spintax-output">{spintax}+{style1}+{style2}</div>
+      <div className="spintax-output">{spintax}</div>
     </div>
   );
 }
