@@ -38,7 +38,7 @@ const handleGenerateClick = () => {
   const question = getRandomQuestion();
   const readingTypeText = readingType === "Higher Self" ? "Higher Self" : readingType === "Shadow Self" ? "Shadow Self" : "Spirit Guide";
   const output = `Write about the ${readingTypeText} of a ${gender === "male" ? "man" : "woman"} born on ${format(birthdate, "MMMM d")}. Use the second pronoun addressing the ${gender === "male" ? "man" : "woman"}. ${question}`;
-  setGeneratedText(output); // Fix the function name here
+  setOutputText(output); // Fix the function name here
 };
 
 
