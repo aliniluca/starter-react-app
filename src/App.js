@@ -45,7 +45,7 @@ const getRandomQuestion = () => {
           : "Spirit Guide";
       const outputText = `Write about the ${readingTypeText} of a ${
         gender === "male" ? "man" : "woman"
-      } born on ${format(birthdate, "MMMM d")}. Use the second pronoun addressing the ${
+      } born on ${format(birthdate, "MMMM do")}. Use the second pronoun addressing the ${
         gender === "male" ? "man" : "woman"
       }. ${question}`;
       setSpintax(outputText);
