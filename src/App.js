@@ -6,8 +6,8 @@ import GenerateButton from './GenerateButton';
 import './App.css';
 
 function App() {
-const TEXT_URL_1 = "https://your-link-to-the-first-text-file.txt";
-const TEXT_URL_2 = "https://your-link-to-the-second-text-file.txt";
+const TEXT_URL_1 = "https://drive.google.com/file/d/1dG-04EObi0EllBQPMZMm3bxgwCTHkKKv/view?usp=share_link";
+const TEXT_URL_2 = "https://drive.google.com/file/d/1g44ORRzhk9f8rIe_7MqSnwW1Rsv7qwwS/view?usp=share_link";
 
 const [style1Text, setStyle1Text] = useState("");
 const [style2Text, setStyle2Text] = useState("");
