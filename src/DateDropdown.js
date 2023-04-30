@@ -11,7 +11,7 @@ const DateDropdown = ({ onSelect }) => {
       'July', 'August', 'September', 'October', 'November', 'December'
     ];
     const selectedDate = `${date.getDate()} of ${monthNames[date.getMonth()]}`;
-    onSelect({ value: selectedDate });
+      onSelect({ value: selectedDate });
   };
 
   return (
