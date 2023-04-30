@@ -1,24 +1,35 @@
 import React from 'react';
-import Select from 'react-select';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCalendarAlt } from '@fortawesome/free-regular-svg-icons';
 
 const DateDropdown = ({ onSelect }) => {
-  const days = Array.from({ length: 31 }, (_, i) => i + 1);
-  const months = Array.from({ length: 12 }, (_, i) => i + 1);
-
-  const options = days.flatMap(day =>
-    months.map(month => ({
-      value: `${day} of ${month}`,
-      label: `${day} of ${month}`,
-    }))
-  );
+  const handleDateChange = (date) => {
+    const monthNames = [
+      'January', 'February', 'March', 'April', 'May', 'June',
+      'July', 'August', 'September', 'October', 'November', 'December'
+    ];
+    const selectedDate = `${date.getDate()} of ${monthNames[date.getMonth()]}`;
+    onSelect({ value: selectedDate });
+  };
 
   return (
-    <Select
-      options={options}
-      onChange={onSelect}
-      placeholder="Select your birthdate"
-      className="date-dropdown"
-    />
+    <div className="date-dropdown">
+      <label htmlFor="birthdate">Birthdate:</label>
+      <DatePicker
+        id="birthdate"
+        placeholderText="Select a date"
+        onChange={handleDateChange}
+        dateFormat="MMMM d"
+        showMonthDropdown
+        showYearDropdown
+        dropdownMode="select"
+        minDate={new Date('1900-01-01')}
+        maxDate={new Date()}
+        customInput={<FontAwesomeIcon icon={faCalendarAlt} />}
+      />
+    </div>
   );
 };
 
