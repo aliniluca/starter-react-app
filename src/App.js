@@ -34,25 +34,27 @@ const getRandomQuestion = () => {
   return questions[Math.floor(Math.random() * questions.length)];
 };
 
-  const handleGenerateClick = () => {
-    if (birthdate && gender && readingType) {
-      const question = getRandomQuestion();
-      const readingTypeText =
-        readingType === "Higher Self"
-          ? "Higher Self"
-          : readingType === "Shadow Self"
-          ? "Shadow Self"
-          : "Spirit Guide";
-      const outputText = `Write about the ${readingTypeText} of a ${
-        gender === "male" ? "man" : "woman"
-      } born on ${format(birthdate, "MMMM do")}. Use the second pronoun addressing the ${
-        gender === "male" ? "man" : "woman"
-      }. ${question}`;
-      setSpintax(outputText);
-    } else {
-      setSpintax("Please fill in all the fields.");
-    }
-  };
+const handleGenerateClick = () => {
+  if (birthdate && gender && readingType) {
+    const question = getRandomQuestion();
+    const readingTypeText =
+      readingType === "Higher Self"
+        ? "Higher Self"
+        : readingType === "Shadow Self"
+        ? "Shadow Self"
+        : "Spirit Guide";
+    const birthdateText = birthdate instanceof Date && !isNaN(birthdate) ? format(birthdate, "MMMM do") : "Invalid date";
+    const outputText = `Write about the ${readingTypeText} of a ${
+      gender === "male" ? "man" : "woman"
+    } born on ${birthdateText}. Use the second pronoun addressing the ${
+      gender === "male" ? "man" : "woman"
+    }. ${question}`;
+    setSpintax(outputText);
+  } else {
+    setSpintax("Please fill in all the fields.");
+  }
+};
+
 
   return (
     <div className="App">
