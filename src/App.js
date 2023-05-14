@@ -1,55 +1,46 @@
 import React, { useState } from 'react';
-import DateDropdown from './DateDropdown';
-import GenderDropdown from './GenderDropdown';
 import ReadingTypeDropdown from './ReadingTypeDropdown';
-import GenerateButton from './GenerateButton';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
-import { format } from "date-fns";
 import AWS from 'aws-sdk';
-import './App.css';
+
+function App() {
+  const [readingType, setReadingType] = useState(null);
+  const [text, setText] = useState("");
 
 const s3 = new AWS.S3({
   accessKeyId: process.env.REACT_APP_AWS_ACCESS_KEY,
   secretAccessKey: process.env.REACT_APP_AWS_SECRET_ACCESS_KEY,
   region: process.env.REACT_APP_AWS_REGION
 });
-
-const bucket = 'cyclic-tame-teal-jellyfish-wig-sa-east-1';
-
-function App() {
-  const [birthdate, setBirthdate] = useState(null);
-  const [gender, setGender] = useState(null);
-  const [readingType, setReadingType] = useState(null);
-  const [outputText, setOutputText] = useState('');
-
-  const handleButtonClick = (fileNumber) => {
-    if (readingType) {
-      s3.getObject({ Bucket: bucket, Key: `${readingType}/${fileNumber}.txt` }, function(err, data) {
-        if (err) console.error(err);
-        else setOutputText(data.Body.toString());
-      });
+  const handleButtonClick = async (number) => {
+    if (!readingType) {
+      alert('Please select a reading type');
+      return;
     }
-  };
 
-  const handleGenerateClick = () => {
-    const output = `Write about the ${readingType} of a ${gender === "male" ? "man" : "woman"} born on ${format(birthdate, "MMMM d")}. Use the second pronoun addressing the ${gender === "male" ? "man" : "woman"}.`;
-    setOutputText(output);
+    const params = {
+      Bucket: 'cyclic-tame-teal-jellyfish-wig-sa-east-1',
+      Key: `${readingType}/${number}.txt`
+    };
+
+    try {
+      const data = await s3.getObject(params).promise();
+      setText(data.Body.toString());
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   return (
     <div className="App">
-      <h1>ChatGPT Prompt Generator</h1>
-      <DateDropdown onSelect={setBirthdate} />
-      <GenderDropdown onSelect={setGender} />
       <ReadingTypeDropdown onSelect={setReadingType} />
-      <GenerateButton onClick={handleGenerateClick} />
-      {[...Array(30)].map((_, i) => (
-        <button key={i} onClick={() => handleButtonClick(i + 1)}>
-          {i + 1}
+      
+      {Array.from({ length: 30 }, (_, i) => i + 1).map(number => (
+        <button key={number} onClick={() => handleButtonClick(number)}>
+          {number}
         </button>
       ))}
-      <div className="output">{outputText}</div>
+
+      <div className="text-output">{text}</div>
     </div>
   );
 }
