@@ -6,8 +6,8 @@ function App() {
   const [readingType, setReadingType] = useState(null);
   const [text, setText] = useState("");
 const s3 = new AWS.S3({
-  accessKeyId: AWS_ACCESS_KEY,
-  secretAccessKey: AWS_SECRET_ACCESS_KEY,
+  accessKeyId: 'ASIATWAXUPAF2HD7OOSS',
+  secretAccessKey: 'uaT8RLI2X5y4frEsxYWSrDykBka+OeTX0GaHPbkb',
   region: 'sa-east-1'
 });
 
