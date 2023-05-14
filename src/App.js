@@ -5,6 +5,9 @@ import AWS from 'aws-sdk';
 function App() {
   const [readingType, setReadingType] = useState(null);
   const [text, setText] = useState("");
+  const express = require('express')
+const app = express()
+const AWS = require("aws-sdk");
 const s3 = new AWS.S3();
 
   const handleButtonClick = async (number) => {
