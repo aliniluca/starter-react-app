@@ -7,8 +7,9 @@ function App() {
   const [text, setText] = useState("");
   
 const AWS = require("aws-sdk");
-const s3 = new AWS.S3();
-
+  const s3 = new AWS.S3({
+    /* your AWS credentials here */
+  });
   const handleButtonClick = async (number) => {
     if (!readingType) {
       alert('Please select a reading type');
