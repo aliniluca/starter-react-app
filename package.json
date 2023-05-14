@@ -37,7 +37,8 @@
     "@fortawesome/free-regular-svg-icons": "^6.1.2",
      "@fortawesome/free-solid-svg-icons": "^6.1.1",
     "date-fns": "^2.27.0",
-    "@fortawesome/react-fontawesome": "^0.1.17"
+    "@fortawesome/react-fontawesome": "^0.1.17",
+     "aws-sdk": "^2.1034.0"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.2",
