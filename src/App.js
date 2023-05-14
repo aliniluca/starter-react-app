@@ -8,9 +8,9 @@ function App() {
   
 const AWS = require("aws-sdk");
 const s3 = new AWS.S3({
-  accessKeyId: process.env.MY_AWS_ACCESS_KEY,
-  secretAccessKey: process.env.MY_AWS_SECRET_ACCESS_KEY,
-  region: process.env.MY_APP_AWS_REGION
+  accessKeyId: process.env.AWS_ACCESS_KEY,
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+  region: process.env.AWS_REGION
 });
   const handleButtonClick = async (number) => {
     if (!readingType) {
