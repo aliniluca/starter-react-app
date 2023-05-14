@@ -6,57 +6,36 @@ import GenerateButton from './GenerateButton';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
 import { format } from "date-fns";
+import AWS from 'aws-sdk';
 import './App.css';
 
+const s3 = new AWS.S3({
+  accessKeyId: process.env.REACT_APP_AWS_ACCESS_KEY,
+  secretAccessKey: process.env.REACT_APP_AWS_SECRET_ACCESS_KEY,
+  region: process.env.REACT_APP_AWS_REGION
+});
+
+const bucket = 'cyclic-tame-teal-jellyfish-wig-sa-east-1';
+
 function App() {
- 
- 
   const [birthdate, setBirthdate] = useState(null);
   const [gender, setGender] = useState(null);
   const [readingType, setReadingType] = useState(null);
-  const [spintax, setSpintax] = useState('');
- 
+  const [outputText, setOutputText] = useState('');
 
-const questions1 = [
-  "What can he teach me?",
-  "How is our connection?",
-  "How do we work together?",
-  "How can I listen to him",
-  "Where do I reach him?"
-];
- const questions2 = [
-  "What is their connection with my spirit animal?",
-  "What is their connection with my ancestors?",
-  "What is their connection with my daimon self?",
-  "What is their connection with my guardian angel?",
-  "What is their connection with my aura and inner energy?",
-];
+  const handleButtonClick = (fileNumber) => {
+    if (readingType) {
+      s3.getObject({ Bucket: bucket, Key: `${readingType}/${fileNumber}.txt` }, function(err, data) {
+        if (err) console.error(err);
+        else setOutputText(data.Body.toString());
+      });
+    }
+  };
 
- 
-
-const handleGenerateClick = () => {
-  if (birthdate && gender && readingType) {
-    const selectedQuestions = Math.random() < 0.5 ? questions1 : questions2;
-    const questionText = selectedQuestions.join(" ");
-    const readingTypeText =
-      readingType === "Higher Self"
-        ? "Higher Self"
-        : readingType === "Shadow Self"
-        ? "Shadow Self"
-        : "Spirit Guide";
-   
-    const outputText = `Write about the ${readingTypeText} of a ${
-      gender === "male" ? "man" : "woman"
-    } born on ${birthdate}. Use the second pronoun addressing the ${
-      gender === "male" ? "man" : "woman"
-    }. ${questionText}`;
-    setSpintax(outputText);
-  } else {
-    setSpintax("Please fill in all the fields.");
-  }
-};
-
-
+  const handleGenerateClick = () => {
+    const output = `Write about the ${readingType} of a ${gender === "male" ? "man" : "woman"} born on ${format(birthdate, "MMMM d")}. Use the second pronoun addressing the ${gender === "male" ? "man" : "woman"}.`;
+    setOutputText(output);
+  };
 
   return (
     <div className="App">
@@ -65,8 +44,12 @@ const handleGenerateClick = () => {
       <GenderDropdown onSelect={setGender} />
       <ReadingTypeDropdown onSelect={setReadingType} />
       <GenerateButton onClick={handleGenerateClick} />
-
-      <div className="spintax-output">{spintax}</div>
+      {[...Array(30)].map((_, i) => (
+        <button key={i} onClick={() => handleButtonClick(i + 1)}>
+          {i + 1}
+        </button>
+      ))}
+      <div className="output">{outputText}</div>
     </div>
   );
 }
