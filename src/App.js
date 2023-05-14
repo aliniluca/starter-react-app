@@ -1,13 +1,19 @@
 import React, { useState } from 'react';
 import ReadingTypeDropdown from './ReadingTypeDropdown';
-import AWS from 'aws-sdk';
+
 
 function App() {
   const [readingType, setReadingType] = useState(null);
   const [text, setText] = useState("");
   
 const AWS = require("aws-sdk");
-const s3 = new AWS.S3()
+AWS.config = new AWS.Config({
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID, // stored in the .env file
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY, // stored in the .env file
+  region: process.env.AWS_REGION, // or specify your region here
+});
+  
+  const s3 = new AWS.S3();
   const handleButtonClick = async (number) => {
     if (!readingType) {
       alert('Please select a reading type');
