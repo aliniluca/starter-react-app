@@ -1,28 +1,22 @@
 import React, { useState } from 'react';
 import ReadingTypeDropdown from './ReadingTypeDropdown';
+import S3FS from 's3fs';
 
+const s3fsImpl = new S3FS();
 
 function App() {
   const [readingType, setReadingType] = useState(null);
   const [text, setText] = useState("");
   
-const AWS = require("aws-sdk");
-
-  const s3 = new AWS.S3();
   const handleButtonClick = async (number) => {
     if (!readingType) {
       alert('Please select a reading type');
       return;
     }
 
-    const params = {
-      Bucket: 'cyclic-lilac-octopus-fez-ca-central-1',
-      Key: `${readingType}/${number}.txt`
-    };
-
     try {
-      const data = await s3.getObject(params).promise();
-      setText(data.Body.toString());
+      const data = await s3fsImpl.readFile(`${readingType}/${number}.txt`, 'utf8');
+      setText(data);
     } catch (err) {
       console.error(err);
     }
