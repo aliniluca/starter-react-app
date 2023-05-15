@@ -16,7 +16,7 @@ const AWS = require("aws-sdk");
     }
 
     const params = {
-      Bucket: 'cyclic-tame-teal-jellyfish-wig-sa-east-1',
+      Bucket: 'cyclic-lilac-octopus-fez-ca-central-1',
       Key: `${readingType}/${number}.txt`
     };
 
