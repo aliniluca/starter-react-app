@@ -12,8 +12,6 @@ function App() {
 
 const s3 = new AWS.S3();
 
-
-  const s3 = new AWS.S3();
   const handleButtonClick = async (number) => {
     if (!readingType) {
       alert('Please select a reading type');
